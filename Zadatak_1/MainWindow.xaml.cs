@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zadatak_1.ViewModel;
 
 namespace Zadatak_1
 {
@@ -20,9 +21,28 @@ namespace Zadatak_1
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel mwm = new MainWindowViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = mwm;
+        }
+
+        //Method responsible for validation of confirmation for delete operation. Executes on button click. 
+        private void HyperlinkButton_Delete(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                mwm.DeleteRow(sender);
+                messageBoxResult = System.Windows.MessageBox.Show("Delete Successfull", "Notification");
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

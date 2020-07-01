@@ -9,7 +9,19 @@ namespace Zadatak_1.Model
     class MainWindowModel
     {
 
+        public Employee Employee { get; set; }
+        public Location Location { get; set; }
+        public Sector Sector { get; set; }
 
+        public MainWindowModel()
+        {
+        }
 
+        public MainWindowModel(Employee employee, Location location, Sector sector)
+        {
+            Employee = employee;
+            Location = location;
+            Sector = sector;
+        }
     }
 }

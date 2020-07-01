@@ -109,10 +109,6 @@ namespace Zadatak_1.ViewModel
                     {
                         m.Employee.Manager = e;
                     }
-                    else
-                    {
-                        m.Employee.Manager.FirstName = "/";
-                    }
                 }
             }
         }
@@ -125,6 +121,13 @@ namespace Zadatak_1.ViewModel
         {
             Thread.Sleep(2000);
             if (row == null) { return; }
+            foreach (var m in MainWindowViewModels)
+            {
+                if(m.Employee.Manager.Id == row.Employee.Id)
+                {
+                    m.Employee.Manager = null;
+                }
+            }
             var con = new SqlConnection(ConnectionString);
             con.Open();
             var cmd = new SqlCommand("delete from tblEmployee where EmployeeID = @EmployeeID;", con);

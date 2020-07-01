@@ -18,6 +18,7 @@ namespace Zadatak_1.ViewModel
     {
 
         public ObservableCollection<MainWindowModel> MainWindowViewModels { get; set; }
+        public static List<Employee> employees = new List<Employee>();
         static readonly string ConnectionString = @"Data Source=(local);Initial Catalog=Zadatak_1;Integrated Security=True;";
 
         public DelegateCommand ExecuteDeleteCommand { get; set; }
@@ -73,7 +74,7 @@ namespace Zadatak_1.ViewModel
                             Gender = char.Parse(row[5].ToString()),
                             RegistrationNumber = row[6].ToString(),
                             PhoneNumber = row[7].ToString(),
-
+                            Manager = new Employee()
                         },
                         Location = new Location
                         {
@@ -92,6 +93,22 @@ namespace Zadatak_1.ViewModel
                     m.Employee.Location = m.Location;
                     m.Employee.Sector = m.Sector;
                     MainWindowViewModels.Add(m);
+                    employees.Add(m.Employee);
+                }
+            }
+
+            foreach (var m in MainWindowViewModels)
+            {
+                foreach (Employee e in employees)
+                {
+                    if (m.ManagerId == e.Id)
+                    {
+                        m.Employee.Manager = e;
+                    }
+                    else
+                    {
+                        m.Employee.Manager.FirstName = "/";
+                    }
                 }
             }
         }

@@ -56,10 +56,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Actions\LogActions.cs" />
+    <Compile Include="AddEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Sector.cs" />
+    <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Page Include="AddEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -38,7 +38,14 @@ Height="288" Width="994" Margin="10,5" HorizontalAlignment="Center" SelectedItem
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Sector" Binding="{Binding Employee.Sector.Title}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Manager" Binding="{Binding ManagerId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Manager" IsReadOnly="True">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="Employee.Manager.FirstName" />
+                            <Binding Path="Employee.Manager.LastName" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

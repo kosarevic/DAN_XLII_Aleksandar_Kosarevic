@@ -45,7 +45,9 @@ namespace Zadatak_1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            AddEmployeeWindow AddCardPage = new AddEmployeeWindow();
+            AddCardPage.Show();
+            this.Close();
         }
     }
 }

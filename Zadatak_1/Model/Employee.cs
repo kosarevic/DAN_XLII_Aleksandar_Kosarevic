@@ -19,13 +19,13 @@ namespace Zadatak_1.Model
         public string PhoneNumber { get; set; }
         public Location Location { get; set; }
         public Sector Sector { get; set; }
-        public int ManagerId { get; set; }
+        public Employee Manager { get; set; }
 
         public Employee()
         {
         }
 
-        public Employee(int id, string firstName, string lastName, string jMBG, DateTime dateOfBirth, char gender, string registrationNumber, string phoneNumber, Location location, Sector sector, int managerId)
+        public Employee(int id, string firstName, string lastName, string jMBG, DateTime dateOfBirth, char gender, string registrationNumber, string phoneNumber, Location location, Sector sector, Employee manager)
         {
             Id = id;
             FirstName = firstName;
@@ -37,7 +37,7 @@ namespace Zadatak_1.Model
             PhoneNumber = phoneNumber;
             Location = location;
             Sector = sector;
-            ManagerId = managerId;
+            Manager = manager;
         }
     }
 }

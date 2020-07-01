@@ -38,7 +38,7 @@ Height="288" Width="994" Margin="10,5" HorizontalAlignment="Center" SelectedItem
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Sector" Binding="{Binding Employee.Sector.Title}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Manager" Binding="{Binding Employee.ManagerId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Manager" Binding="{Binding ManagerId}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

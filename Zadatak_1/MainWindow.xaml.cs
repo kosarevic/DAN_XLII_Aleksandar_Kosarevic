@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,8 +36,10 @@ namespace Zadatak_1
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                mwm.DeleteRow(sender);
-                messageBoxResult = System.Windows.MessageBox.Show("Delete Successfull", "Notification");
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.WorkerReportsProgress = true;
+                worker.DoWork += mwm.DeleteRow;
+                worker.RunWorkerAsync();
             }
         }
 

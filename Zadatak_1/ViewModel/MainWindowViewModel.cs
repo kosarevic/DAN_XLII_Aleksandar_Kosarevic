@@ -6,7 +6,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Zadatak_1.Model;
 
 namespace Zadatak_1.ViewModel
@@ -26,6 +28,7 @@ namespace Zadatak_1.ViewModel
         }
 
         private MainWindowModel row;
+        private MessageBoxResult messageBoxResult;
 
         public MainWindowModel Row
         {
@@ -69,7 +72,7 @@ namespace Zadatak_1.ViewModel
                             Gender = char.Parse(row[5].ToString()),
                             RegistrationNumber = row[6].ToString(),
                             PhoneNumber = row[7].ToString(),
-                            ManagerId = int.Parse(row[10].ToString())
+
                         },
                         Location = new Location
                         {
@@ -82,7 +85,8 @@ namespace Zadatak_1.ViewModel
                         {
                             Id = int.Parse(row[15].ToString()),
                             Title = row[16].ToString()
-                        }
+                        },
+                        ManagerId = int.Parse(row[10].ToString())
                     };
                     m.Employee.Location = m.Location;
                     m.Employee.Sector = m.Sector;
@@ -91,22 +95,25 @@ namespace Zadatak_1.ViewModel
             }
         }
 
-        public void DeleteRow(object id)
+        public void DeleteRow(object sender, DoWorkEventArgs e)
         {
+            Thread.Sleep(2000);
             //Condition added to handle exeption if delete button is pressed without any previous selection.
             if (row == null) { return; }
             var con = new SqlConnection(ConnectionString);
             con.Open();
-            var cmd = new SqlCommand("delete from tblUser where UserID = @UserId;" +
-                "delete from tblIdentityCard where IdentityCardID = @IdCardId;", con);
-            //cmd.Parameters.AddWithValue("@UserId", row.User.Id);
-            //cmd.Parameters.AddWithValue("@IdCardId", row.IdentityCard.Id);
+            var cmd = new SqlCommand("delete from tblEmployee where EmployeeID = @EmployeeID;", con);
+            cmd.Parameters.AddWithValue("@EmployeeID", row.Employee.Id);
             cmd.ExecuteNonQuery();
             //LogActions.LogDeleteUser(row.User);
             //Object is removed from ongoing list.
-            MainWindowViewModels.Remove(row);
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                MainWindowViewModels.Remove(row);
+            });
             con.Close();
             con.Dispose();
+            messageBoxResult = System.Windows.MessageBox.Show("Delete Successfull", "Notification");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

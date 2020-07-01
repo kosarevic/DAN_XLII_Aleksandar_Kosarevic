@@ -42,7 +42,9 @@ namespace Zadatak_1
                 worker.RunWorkerAsync();
             }
         }
-
+        /// <summary>
+        /// Method responsible for canceling deletation of employee on cancel button click.
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddEmployeeWindow AddCardPage = new AddEmployeeWindow();

@@ -14,23 +14,25 @@ using Zadatak_1.Model;
 
 namespace Zadatak_1.ViewModel
 {
+    /// <summary>
+    /// Class made for displaying Main Window features of the application
+    /// </summary>
     class MainWindowViewModel : INotifyPropertyChanged
     {
-
+        //Collections made to ensure application proper functionality.
         public ObservableCollection<MainWindowModel> MainWindowViewModels { get; set; }
         public static List<Employee> employees = new List<Employee>();
         static readonly string ConnectionString = @"Data Source=(local);Initial Catalog=Zadatak_1;Integrated Security=True;";
 
         public DelegateCommand ExecuteDeleteCommand { get; set; }
-
+        //Constructor ensures that necesery methods are invoked when class object initializes.
         public MainWindowViewModel()
         {
             FillList();
             ExecuteDeleteCommand = new DelegateCommand(DeleteRow, (x) => true);
         }
-
+        //Table row data is stored here
         private MainWindowModel row;
-        private MessageBoxResult messageBoxResult;
 
         public MainWindowModel Row
         {
@@ -44,7 +46,9 @@ namespace Zadatak_1.ViewModel
                 }
             }
         }
-
+        /// <summary>
+        /// Method for filling out previously mentioned collection
+        /// </summary>
         public void FillList()
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -96,7 +100,7 @@ namespace Zadatak_1.ViewModel
                     employees.Add(m.Employee);
                 }
             }
-
+            //Loop added to ensure each employee gets a manager if it has one.
             foreach (var m in MainWindowViewModels)
             {
                 foreach (Employee e in employees)
@@ -112,11 +116,14 @@ namespace Zadatak_1.ViewModel
                 }
             }
         }
-
+        /// <summary>
+        /// Method implements delete functionality.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void DeleteRow(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            //Condition added to handle exeption if delete button is pressed without any previous selection.
             if (row == null) { return; }
             var con = new SqlConnection(ConnectionString);
             con.Open();
@@ -131,7 +138,7 @@ namespace Zadatak_1.ViewModel
             });
             con.Close();
             con.Dispose();
-            messageBoxResult = System.Windows.MessageBox.Show("Delete Successfull", "Notification");
+            var messageBoxResult = System.Windows.MessageBox.Show("Delete Successfull", "Notification");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

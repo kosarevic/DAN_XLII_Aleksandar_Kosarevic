@@ -14,10 +14,13 @@ using Zadatak_1.Model;
 
 namespace Zadatak_1.ViewModel
 {
+    /// <summary>
+    /// Class made for displaying Add Employee Window features of the application
+    /// </summary>
     class AddEmployeeViewModel : INotifyPropertyChanged
     {
-
         static readonly string ConnectionString = @"Data Source=(local);Initial Catalog=Zadatak_1;Integrated Security=True;";
+        //Class specific collection is determined below.
         public ObservableCollection<Location> Locations { get; set; }
 
         private Employee employee;
@@ -49,7 +52,9 @@ namespace Zadatak_1.ViewModel
             FillList();
             Employee employee = new Employee();
         }
-
+        /// <summary>
+        /// Method for filling out previously mentioned collection
+        /// </summary>
         public void FillList()
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -76,7 +81,9 @@ namespace Zadatak_1.ViewModel
                 }
             }
         }
-
+        /// <summary>
+        /// Method enables adding employee to the database.
+        /// </summary>
         public void AddEmployee()
         {
             Thread.Sleep(2000);

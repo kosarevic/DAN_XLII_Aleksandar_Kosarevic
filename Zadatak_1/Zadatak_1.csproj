@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Actions\LogActions.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Sector.cs" />
@@ -100,8 +101,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Files\" />
+    <Resource Include="Files\LogFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

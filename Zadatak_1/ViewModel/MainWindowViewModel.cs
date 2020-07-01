@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Zadatak_1.LogFile;
 using Zadatak_1.Model;
 
 namespace Zadatak_1.ViewModel
@@ -105,7 +106,7 @@ namespace Zadatak_1.ViewModel
             var cmd = new SqlCommand("delete from tblEmployee where EmployeeID = @EmployeeID;", con);
             cmd.Parameters.AddWithValue("@EmployeeID", row.Employee.Id);
             cmd.ExecuteNonQuery();
-            //LogActions.LogDeleteUser(row.User);
+            LogActions.LogDeleteEmployee(row.Employee);
             //Object is removed from ongoing list.
             App.Current.Dispatcher.Invoke((Action)delegate
             {

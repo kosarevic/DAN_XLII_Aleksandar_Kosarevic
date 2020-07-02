@@ -13,6 +13,7 @@ namespace Zadatak_1.Model
         public Location Location { get; set; }
         public Sector Sector { get; set; }
         public int ManagerId { get; set; }
+        public string Manager { get; set; }
 
         public MainWindowModel()
         {

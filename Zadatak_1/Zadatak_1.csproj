@@ -62,6 +62,7 @@
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Sector.cs" />
+    <Compile Include="Validation\AddEmployeeValidation.cs" />
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Page Include="AddEmployeeWindow.xaml">

@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -92,7 +94,8 @@ namespace Zadatak_1.ViewModel
                             Id = int.Parse(row[15].ToString()),
                             Title = row[16].ToString()
                         },
-                        ManagerId = int.Parse(row[10].ToString())
+                        ManagerId = int.Parse(row[10].ToString()),
+                        Manager = ""
                     };
                     m.Employee.Location = m.Location;
                     m.Employee.Sector = m.Sector;
@@ -108,6 +111,7 @@ namespace Zadatak_1.ViewModel
                     if (m.ManagerId == e.Id)
                     {
                         m.Employee.Manager = e;
+                        m.Manager = e.FirstName + " " + e.LastName;
                     }
                 }
             }
@@ -120,14 +124,16 @@ namespace Zadatak_1.ViewModel
         public void DeleteRow(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            if (row == null) { return; }
+
             foreach (var m in MainWindowViewModels)
             {
-                if(m.Employee.Manager.Id == row.Employee.Id)
+                if (m.ManagerId == row.Employee.Id)
                 {
+                    m.Manager = null;
                     m.Employee.Manager = null;
                 }
             }
+
             var con = new SqlConnection(ConnectionString);
             con.Open();
             var cmd = new SqlCommand("delete from tblEmployee where EmployeeID = @EmployeeID;", con);

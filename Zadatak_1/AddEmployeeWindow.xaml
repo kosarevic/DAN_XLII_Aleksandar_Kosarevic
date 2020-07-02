@@ -11,7 +11,7 @@
         <TextBlock Text="Add Employee" TextAlignment="Center" Foreground="#282828" Margin="304,10,315,368" HorizontalAlignment="Center" FontSize="25" Width="173"/>
         <TextBox Text="{Binding Employee.FirstName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="105,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding Employee.LastName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="318,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox SelectionChanged="LostFocus_TextBox" Text="{Binding Employee.JMBG, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="520,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Employee.JMBG, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="520,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="316,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="First Name" HorizontalAlignment="Left" Margin="132,95,0,0" VerticalAlignment="Top"/>
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="345,95,0,0" VerticalAlignment="Top"/>

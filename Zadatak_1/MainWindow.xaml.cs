@@ -42,6 +42,14 @@ namespace Zadatak_1
                 worker.RunWorkerAsync();
             }
         }
+
+        private void HyperlinkButton_Edit(object sender, RoutedEventArgs e)
+        {
+            EditEmployeeWindow EditPage = new EditEmployeeWindow(mwm.Row.Employee);
+            EditPage.Show();
+            this.Close();
+        }
+
         /// <summary>
         /// Method responsible for canceling deletation of employee on cancel button click.
         /// </summary>

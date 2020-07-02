@@ -8,23 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Zadatak_1.LogFile;
 using Zadatak_1.Model;
 using Zadatak_1.Validation;
-using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.ViewModel
 {
-    /// <summary>
-    /// Class made for displaying Add Employee Window features of the application
-    /// </summary>
-    class AddEmployeeViewModel : INotifyPropertyChanged
+    class EditEmployeeViewModel : INotifyPropertyChanged
     {
         static readonly string ConnectionString = @"Data Source=(local);Initial Catalog=Zadatak_1;Integrated Security=True;";
-        //Class specific collection is determined below.
         public ObservableCollection<Location> Locations { get; set; }
         public ObservableCollection<Sector> Sectors { get; set; }
+        public static List<Employee> ManagersSelected = new List<Employee>();
+
+        public EditEmployeeViewModel()
+        {
+            ManagersSelected = new List<Employee>();
+            Employee = new Employee();
+            FillList();
+        }
 
         private Employee employee;
 
@@ -50,24 +52,14 @@ namespace Zadatak_1.ViewModel
             set { genders = value; }
         }
 
-        private List<Employee> employees;
+        private List<Employee> managers;
 
-        public List<Employee> Employees
+        public List<Employee> Managers
         {
-            get { return MainWindowViewModel.employees; }
-            set { employees = value; }
+            get { return ManagersSelected; }
+            set { managers = value; }
         }
 
-        public AddEmployeeViewModel()
-        {
-            FillList();
-            Employee = new Employee();
-            Employee.Sector = new Sector();
-            Employee.Manager = new Employee();
-        }
-        /// <summary>
-        /// Method for filling out previously mentioned collection
-        /// </summary>
         public void FillList()
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -115,11 +107,18 @@ namespace Zadatak_1.ViewModel
                     Sectors.Add(s);
                 }
             }
+
+            ManagersSelected = MainWindowViewModel.employees;
+            foreach (Employee e in Managers)
+            {
+                if(e.Id == Employee.Id)
+                {
+                    ManagersSelected.Remove(e);
+                }
+            }
         }
-        /// <summary>
-        /// Method enables adding employee to the database.
-        /// </summary>
-        public void AddEmployee(object sender, DoWorkEventArgs e)
+
+        public void EditEmployee(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
             foreach (Sector s in Sectors)
@@ -143,13 +142,14 @@ namespace Zadatak_1.ViewModel
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                var cmd = new SqlCommand(@"insert into tblEmployee values (@Name, @Surname, @JMBG, @DateOfBirth, @Gender, @RegNum, @PhoneNumber, @LocId, @SectorID, @ManagerID);", conn);
+                var cmd = new SqlCommand("update tblEmployee set FirstName=@Name, LastName=@Surname, JMBG=@JMBG, DateOfBirth=@DateOfBirth, Gender=@Gender, RegistrationNumber=@RegNum, PhoneNumber=@PhoneNumber, LocationID=@LocId, SectorID=@SectorID, ManagerID=@ManagerID where EmployeeID=@UID;", conn);
+                cmd.Parameters.AddWithValue("@UID", Employee.Id);
                 cmd.Parameters.AddWithValue("@Name", Employee.FirstName);
                 cmd.Parameters.AddWithValue("@Surname", Employee.LastName);
                 cmd.Parameters.AddWithValue("@JMBG", Employee.JMBG);
                 cmd.Parameters.AddWithValue("@DateOfBirth", AddEmployeeValidation.dateOfBirth);
                 cmd.Parameters.AddWithValue("@Gender", Employee.Gender);
-                cmd.Parameters.AddWithValue("@RegNum", AddEmployeeValidation.registrationNumber);
+                cmd.Parameters.AddWithValue("@RegNum", Employee.RegistrationNumber);
                 cmd.Parameters.AddWithValue("@PhoneNumber", Employee.PhoneNumber);
                 cmd.Parameters.AddWithValue("@LocId", Employee.Location.Id);
                 cmd.Parameters.AddWithValue("@SectorID", Employee.Sector.Id);
@@ -158,7 +158,7 @@ namespace Zadatak_1.ViewModel
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
-            LogActions.LogAddEmployee(Employee);
+            LogActions.LogEditEmployee(Employee);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

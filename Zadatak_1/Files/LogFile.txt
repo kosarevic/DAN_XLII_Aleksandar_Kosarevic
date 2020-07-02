@@ -1,6 +1,10 @@
-﻿[02.07.2020 17:07] Employee: aa bb, has been created
-[02.07.2020 17:07] Employee: aa bb, has been deleted
-[02.07.2020 17:07] Employee: aa bb, has been deleted
-[02.07.2020 17:11] Employee: aa bb, has been created
-[02.07.2020 17:12] Employee: aa bb, has been deleted
-[02.07.2020 17:12] Employee: 213123 123123, has been deleted
+﻿[02.07.2020 17:21] Employee: aa bb, has been created
+[02.07.2020 17:23] Employee: ccc ccc, has been created
+[02.07.2020 17:25] Employee: xxx xxx, has been created
+[02.07.2020 18:07] Employee: aaa aaa, has been created
+[02.07.2020 19:37] Employee: aaa aaa, has been deleted
+[02.07.2020 19:37] Employee: xxx xxx, has been deleted
+[02.07.2020 19:37] Employee: ccc ccc, has been deleted
+[02.07.2020 19:38] Employee: Name 4 Surname 4, has been deleted
+[02.07.2020 21:41] Employee: Name 1aaaa Surname 1, has been updated
+[02.07.2020 22:31] Employee: Name Surname, has been updated

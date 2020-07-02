@@ -39,6 +39,13 @@ Height="288" Width="994" Margin="10,5" HorizontalAlignment="Center" SelectedItem
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Sector" Binding="{Binding Employee.Sector.Title}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Manager" Binding="{Binding Manager,  Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Edit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="HyperlinkButton_Edit" Content="E"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

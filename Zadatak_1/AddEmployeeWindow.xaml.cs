@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,10 +37,6 @@ namespace Zadatak_1
             aevm.Employee.Sector.Title = "";
         }
 
-        private void LostFocus_TextBox(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void Btn_Ok(object sender, RoutedEventArgs e)
         {
             if (AddEmployeeValidation.Validate(aevm.Employee))
@@ -53,7 +51,11 @@ namespace Zadatak_1
                 }
                 else
                 {
-                    aevm.AddEmployee();
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.DoWork += aevm.AddEmployee;
+                    worker.RunWorkerAsync();
+                    Thread.Sleep(2000);
+                    MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Employee successfully created.", "Notification");
                     MainWindow MainPage = new MainWindow();
                     MainPage.Show();
                     this.Close();

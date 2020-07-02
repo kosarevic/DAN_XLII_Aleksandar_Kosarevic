@@ -124,7 +124,6 @@ namespace Zadatak_1.ViewModel
         public void DeleteRow(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-
             foreach (var m in MainWindowViewModels)
             {
                 if (m.ManagerId == row.Employee.Id)
